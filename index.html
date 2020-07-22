@@ -1,9 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pioneer Bank</title>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pioneer Bank</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="login-area">
+    <h1 class="text-center">Welcome to Pioneer Bank</h1>
+    <div id="submited-area">
+      <h4>Login</h4>
+      <input type="email" placeholder="Email" class="form-control" /> <br />
+      <input type="password" placeholder="Password" class="form-control" />
+      <br />
+      <button id="loginBtn" class="btn btn-success">Login</button>
+    </div>
+  </div>
+  <div id='transtion-area'>
+    <div class='row'>
+      <div class='col-md-4'>
+        <div class="deposit status">
+          <h5>Deposit</h5>
+          <h2>$ <span id="currentDeposit">00</span></h2>
+        </div>
+      </div>
+      <div class='col-md-4'>
+        <div class="withdraw status">
+          <h5>Withdraw</h5>
+          <h2>$ <span id="currentWithdraw">00</span></h2>
+        </div>
+      </div>
+      <div class='col-md-4'>
+        <div class="balance status">
+          <h5>Balance</h5>
+          <h2>$ <span id="currentBalance">1240</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6'>
+        <div id="submited-area">
+          <h4>Deposit</h4>
+          <input id="depositAmount" type="text" placeholder="$ amount you want to deposit" class="form-control" />
+          <br />
+          <button id="depositBtn" class="btn btn-success">Deposit</button>
+        </div>
+      </div>
+      <div class='col-md-6'>
+        <div id="submited-area">
+          <h4>Withdraw</h4>
+          <input id="withdrawAmount" type="text" placeholder="$ amount you want to withdraw" class="form-control" />
+          <br />
+          <button id="withdrawBtn" class="btn btn-success">Withdraw</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // loginBtn Event Handler
+    const loginBtn = document.getElementById('loginBtn');
+    loginBtn.addEventListener('click', function (event) {
+      document.getElementById('login-area').style.display = 'none';
+      document.getElementById('transtion-area').style.display = 'block';
+    });
+
+    // depositBtn Event Handler
+    const depositBtn = document.getElementById('depositBtn');
+    depositBtn.addEventListener('click', function (event) {
+      let depositAmount = document.getElementById('depositAmount').value;
+      depositAmount = +depositAmount;
+
+      let currentDeposit = document.getElementById('currentDeposit').innerText;
+      currentDeposit = +currentDeposit;
+
+      document.getElementById('currentDeposit').innerText = depositAmount + currentDeposit;
+
+      let currentBalance = document.getElementById('currentBalance').innerText;
+      currentBalance = +currentBalance;
+
+      document.getElementById('currentBalance').innerText = depositAmount + currentBalance;
+
+      document.getElementById('depositAmount').value = '';
+    });
+
+    const withdrawBtn = document.getElementById('withdrawBtn');
+    withdrawBtn.addEventListener('click', function (event) {
+      let withdrawAmount = document.getElementById('withdrawAmount').value;
+      withdrawAmount = +withdrawAmount;
+
+      let currentWithdraw = document.getElementById('currentWithdraw').innerText;
+      currentWithdraw = +currentWithdraw;
+
+      document.getElementById('currentWithdraw').innerText = withdrawAmount + currentWithdraw;
+
+      let currentBalance = document.getElementById('currentBalance').innerText;
+      currentBalance = +currentBalance;
+
+      document.getElementById('currentBalance').innerText = currentBalance - withdrawAmount;
+      document.getElementById('withdrawAmount').value = '';
+    });
+  </script>
+</body>
+
 </html>
