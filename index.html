@@ -72,38 +72,36 @@
     // depositBtn Event Handler
     const depositBtn = document.getElementById('depositBtn');
     depositBtn.addEventListener('click', function (event) {
-      let depositAmount = document.getElementById('depositAmount').value;
-      depositAmount = +depositAmount;
-
-      let currentDeposit = document.getElementById('currentDeposit').innerText;
-      currentDeposit = +currentDeposit;
-
-      document.getElementById('currentDeposit').innerText = depositAmount + currentDeposit;
-
-      let currentBalance = document.getElementById('currentBalance').innerText;
-      currentBalance = +currentBalance;
-
-      document.getElementById('currentBalance').innerText = depositAmount + currentBalance;
-
-      document.getElementById('depositAmount').value = '';
+      const depositAmount = amount('depositAmount');
+      currentUpdate('currentDeposit', depositAmount);
+      currentUpdate('currentBalance', depositAmount);
+      clear('depositAmount');
     });
 
+    // withdrawBtn Event Handler
     const withdrawBtn = document.getElementById('withdrawBtn');
     withdrawBtn.addEventListener('click', function (event) {
-      let withdrawAmount = document.getElementById('withdrawAmount').value;
-      withdrawAmount = +withdrawAmount;
-
-      let currentWithdraw = document.getElementById('currentWithdraw').innerText;
-      currentWithdraw = +currentWithdraw;
-
-      document.getElementById('currentWithdraw').innerText = withdrawAmount + currentWithdraw;
-
-      let currentBalance = document.getElementById('currentBalance').innerText;
-      currentBalance = +currentBalance;
-
-      document.getElementById('currentBalance').innerText = currentBalance - withdrawAmount;
-      document.getElementById('withdrawAmount').value = '';
+      const withdrawAmount = amount('withdrawAmount');
+      currentUpdate('currentWithdraw', withdrawAmount);
+      currentUpdate('currentBalance', -1 * withdrawAmount);
+      clear('withdrawAmount');
     });
+
+    function amount(id) {
+      const amount = document.getElementById(id).value;
+      return +amount;
+    }
+
+    function currentUpdate(id, amount) {
+      let current = document.getElementById(id).innerText;
+      current = +current;
+
+      document.getElementById(id).innerText = amount + current;
+    }
+
+    function clear(id) {
+      document.getElementById(id).value = '';
+    }
   </script>
 </body>
 
